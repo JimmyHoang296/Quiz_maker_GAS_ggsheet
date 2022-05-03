@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "parcel-plugin-inliner": "^1.0.14"
+  },
+  "scripts": {
+    "bld": "parcel build client/index.html --no-minify --no-cache --no-source-maps && node util.js && clasp push",
+    "watch": "nodemon --watch client --watch server --exec \"npm run bld\" --ext js,html,scss,css"
+  }
+}

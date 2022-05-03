@@ -1,0 +1,137 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+.wrapper{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 0px 10px hsla(0, 0%, 91%,0.3);
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+.logo-img{
+    height: 40px;
+    margin-right: 20px;
+}
+
+.tester-infor{
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 0px 10px hsla(0, 0%, 91%,0.3);
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+.tester-infor label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
+}
+
+.tester-infor label span{
+    margin-right: 5px;
+}
+
+.tester-infor input{
+    padding: 5px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #f7f7f7;
+}
+
+button{
+    display: block;
+    margin-top: 10px;
+    margin: 10px auto 5px auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #f7f7f7;
+    background-color: bisque;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+button:hover{
+    opacity: 0.8;
+}
+
+.test{
+    display: none;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 0px 10px hsla(0, 0%, 91%,0.3);
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+.qa{
+    padding: 20px;
+}
+
+.qa .question{
+    margin-bottom: 10px;
+}
+
+.qa .answers{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.qa .answer{
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.qa .answer input{
+    margin-right: 10px;
+}
+
+.counting-clock{
+    position: fixed;
+    padding: 10px 20px;
+    background-color: bisque;
+    top: 20px;
+    right: 20px;
+    display: none;
+}
+
+.modal{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 99;
+    padding: 40px;
+}
+
+.result{
+    text-align: center;
+    padding: 20px 40px;
+    background-color: rgb(180, 179, 179);
+    border-radius: 10px;
+    font-size: 24px;
+    max-width: 500px;
+}

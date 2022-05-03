@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra kiến thức</title>
+    <style>*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+.wrapper{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding-top: 20px;
+    max-width: 1000px;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 0px 10px hsla(0, 0%, 91%,0.3);
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+.logo-img{
+    height: 40px;
+    margin-right: 20px;
+}
+
+.tester-infor{
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 0px 10px hsla(0, 0%, 91%,0.3);
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+.tester-infor label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
+}
+
+.tester-infor label span{
+    margin-right: 5px;
+}
+
+.tester-infor input{
+    padding: 5px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #f7f7f7;
+}
+
+button{
+    display: block;
+    margin-top: 10px;
+    margin: 10px auto 5px auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #f7f7f7;
+    background-color: bisque;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+button:hover{
+    opacity: 0.8;
+}
+
+.test{
+    display: none;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 0px 10px hsla(0, 0%, 91%,0.3);
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+.qa{
+    padding: 20px;
+}
+
+.qa .question{
+    margin-bottom: 10px;
+}
+
+.qa .answers{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.qa .answer{
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.qa .answer input{
+    margin-right: 10px;
+}
+
+.counting-clock{
+    position: fixed;
+    padding: 10px 20px;
+    background-color: bisque;
+    top: 20px;
+    right: 20px;
+    display: none;
+}
+
+.modal{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    padding: 40px;
+}
+
+.result{
+    text-align: center;
+    padding: 20px 40px;
+    background-color: rgb(180, 179, 179);
+    border-radius: 10px;
+    font-size: 24px;
+    max-width: 500px;
+}</style>
+</head>
+<body>
+    <div class="wrapper">
+        
+        <header class="header">
+            <img src="data:image/png;base64,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" alt="" class="logo-img">
+            <h2 class="title">Kiểm tra kiến thức</h2>
+        </header>
+
+        <form class="tester-infor">
+            <label for="emp_name">
+                <span>Họ tên: </span>
+                <input type="text" id="emp_name" name="emp_name" value="">
+            </label>
+
+            <label for="emp_id">
+                <span>Mã nhân viên:</span>
+                <input type="text" id="emp_id" name="emp_id" value="">
+            </label>
+    
+            <label for="emp_dept">
+                <span>Bộ phận:</span> 
+                <input type="text" id="emp_dept" name="emp_dept" value="">
+            </label>
+
+            <button id="start">Bắt đầu kiểm tra</button>
+        </form>
+
+        <form class="test"></form>
+
+        <div class="counting-clock"></div>
+
+        <div class="modal">
+            <div class="result"></div>
+        </div>
+
+    </div>
+    <script>// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+parcelRequire = (function (modules, cache, entry, globalName) {
+  // Save the require from previous bundle to this closure if any
+  var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
+  var nodeRequire = typeof require === 'function' && require;
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire = typeof parcelRequire === 'function' && parcelRequire;
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
+        var err = new Error('Cannot find module \'' + name + '\'');
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+      localRequire.cache = {};
+
+      var module = cache[name] = new newRequire.Module(name);
+
+      modules[name][0].call(module.exports, localRequire, module, module.exports, this);
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x){
+      return newRequire(localRequire.resolve(x));
+    }
+
+    function resolve(x){
+      return modules[name][1][x] || x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [function (require, module) {
+      module.exports = exports;
+    }, {}];
+  };
+
+  var error;
+  for (var i = 0; i < entry.length; i++) {
+    try {
+      newRequire(entry[i]);
+    } catch (e) {
+      // Save first error but execute all entries
+      if (!error) {
+        error = e;
+      }
+    }
+  }
+
+  if (entry.length) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(entry[entry.length - 1]);
+
+    // CommonJS
+    if (typeof exports === "object" && typeof module !== "undefined") {
+      module.exports = mainExports;
+
+    // RequireJS
+    } else if (typeof define === "function" && define.amd) {
+     define(function () {
+       return mainExports;
+     });
+
+    // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+
+  // Override the current require with this new one
+  parcelRequire = newRequire;
+
+  if (error) {
+    // throw error from earlier, _after updating parcelRequire_
+    throw error;
+  }
+
+  return newRequire;
+})({"d6sW":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var startBtn = document.getElementById("start");
+var form = document.querySelector(".tester-infor");
+var test = document.querySelector(".test");
+var displayTime = document.querySelector('.counting-clock');
+var empName, empID, empDept;
+var isSubmited = false; // base infor
+
+var quesNumber = 10;
+var testTime = 60; // prevent refresh when submit form
+
+preventRefresh(); // start test
+
+startTest();
+
+function preventRefresh() {
+  function handleForm(event) {
+    event.preventDefault();
+  }
+
+  form.addEventListener("submit", handleForm);
+  test.addEventListener("submit", handleForm);
+}
+
+function startTest() {
+  startBtn.addEventListener("click", function () {
+    // check all input was filled
+    if (!validateform()) {
+      alert("nhap du thong tin");
+      return;
+    } // set emp infor for submit result later
+
+
+    empName = document.getElementById("emp_name").value;
+    empID = document.getElementById("emp_id").value;
+    empDept = document.getElementById("emp_dept").value; //   get Q&A and render
+
+    google.script.run.withSuccessHandler(function (qa) {
+      renderQA(qa); //   start counting time      
+
+      startTimer(testTime, displayTime);
+      displayTime.style.display = "unset";
+    }).makeQuiz(quesNumber);
+  });
+}
+
+function validateform() {
+  var validate = true;
+  var emp_inputs = document.querySelector(".tester-infor").getElementsByTagName("input");
+  emp_inputs = _toConsumableArray(emp_inputs);
+  emp_inputs.forEach(function (input) {
+    if (input.value == null || input.value == "") {
+      validate = false;
+    }
+  });
+  return validate;
+}
+
+function renderQA(qa) {
+  var wrapper = document.querySelector(".test"); //   render qa
+
+  Object.keys(qa).forEach(function (key) {
+    var quest = qa[key];
+    wrapper.innerHTML = wrapper.innerHTML + "\n        <div class=\"qa\">\n            <h2 class=\"question\" id=\"".concat(quest.id, "\">").concat(quest.question, "</h2>\n            <form class=\"answers\">\n                <div class=\"answer\">\n                    <input type=\"radio\" name=\"q_").concat(quest.id, "\" id=\"").concat(quest.id, "a\" value=\"a\">\n                    <label for=\"").concat(quest.id, "a\">").concat(quest.a, "</label>\n                </div>\n                <div class=\"answer\">\n                    <input type=\"radio\" name=\"q_").concat(quest.id, "\" id=\"").concat(quest.id, "b\" value=\"b\">\n                    <label for=\"").concat(quest.id, "b\">").concat(quest.b, "</label>\n                </div>\n                <div class=\"answer\">\n                    <input type=\"radio\" name=\"q_").concat(quest.id, "\" id=\"").concat(quest.id, "c\" value=\"c\" style=\"display:").concat(quest.c == "" ? "none" : "unset", "\">\n                    <label for=\"").concat(quest.id, "c\">").concat(quest.c, "</label>\n                </div>\n                <div class=\"answer\">\n                    <input type=\"radio\" name=\"q_").concat(quest.id, "\" id=\"").concat(quest.id, "d\" value=\"d\" style=\"display:").concat(quest.d == "" ? "none" : "unset", "\">\n                    <label for=\"").concat(quest.id, "d\">").concat(quest.d, "</label>\n                </div>\n            </div>\n        </div>\n        ");
+  });
+  wrapper.innerHTML = wrapper.innerHTML + "<button id=\"submit\">N\u1ED9p b\xE0i</button>";
+  test.style.display = 'block';
+  form.style.display = 'none'; //   addfunction for submit button
+
+  var submitBtn = document.getElementById("submit");
+  submitBtn.addEventListener('click', function () {
+    if (countAnswer() < quesNumber) {
+      alert('Hãy trả lời hết câu hỏi');
+    } else {
+      var answer = getAnswer();
+      google.script.run.withSuccessHandler(getScore).handleAnswer(answer);
+      submitBtn.disabled = true;
+      isSubmited = true;
+    }
+  }); //   add count for input
+
+  var inputs = _toConsumableArray(test.getElementsByTagName('input'));
+
+  inputs.forEach(function (input) {
+    input.addEventListener('click', countAnswer);
+  });
+}
+
+function startTimer(duration, display) {
+  var timer = duration,
+      minutes,
+      seconds;
+  var myInterval = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    display.textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+      clearInterval(myInterval);
+      var answer = getAnswer();
+      google.script.run.withSuccessHandler(getScore).handleAnswer(answer);
+    } // already submitted
+
+
+    if (isSubmited) {
+      clearInterval(myInterval);
+    }
+  }, 1000);
+}
+
+function getAnswer() {
+  var qas = _toConsumableArray(document.querySelectorAll('.qa'));
+
+  var res = [];
+  qas.forEach(function (qa) {
+    var qa_id = qa.querySelector('.question').id;
+
+    var answers = _toConsumableArray(qa.querySelectorAll('input'));
+
+    var answer;
+    answers.forEach(function (a) {
+      if (a.checked) {
+        answer = a.value;
+      }
+    });
+    res.push({
+      id: qa_id,
+      answer: answer
+    });
+  });
+  res = {
+    "empName": empName,
+    "empID": empID,
+    "empDept": empDept,
+    "QA": res
+  };
+  return res;
+}
+
+function getScore(score) {
+  var modalElement = document.querySelector('.modal');
+  var resultDisplay = document.querySelector('.result');
+  resultDisplay.innerHTML = "B\u1EA1n \u0111\xE3 ho\xE0n th\xE0nh b\xE0i ki\u1EC3m tra v\xE0 \u0111\xFAng ".concat(score, "/").concat(quesNumber, " c\xE2u");
+  modalElement.style.display = "flex";
+}
+
+function countAnswer() {
+  var qas = _toConsumableArray(document.querySelectorAll('.qa'));
+
+  var counter = 0;
+  qas.forEach(function (qa) {
+    var answers = _toConsumableArray(qa.getElementsByTagName('input'));
+
+    answers.forEach(function (a) {
+      if (a.checked) {
+        counter = counter + 1;
+      }
+    });
+  });
+  return counter;
+}
+},{}]},{},["d6sW"], null)</script>
+</body>
+</html>

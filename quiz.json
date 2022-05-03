@@ -1,0 +1,45 @@
+{
+    "qa":[
+        {
+            "id":1,
+            "question": "câu hỏi ID 1",
+            "a": "Đáp án A",
+            "b": "Đáp án B",
+            "c": "Đáp án C",
+            "d": "Đáp án D"    
+        },
+        {
+            "id":2,
+            "question": "câu hỏi ID 2",
+            "a": "Đáp án A",
+            "b": "Đáp án B",
+            "c": "Đáp án C",
+            "d": "Đáp án D"    
+        },
+        {
+            "id":4,
+            "question": "câu hỏi ID 4",
+            "a": "Đáp án A",
+            "b": "Đáp án B",
+            "c": "Đáp án C",
+            "d": "Đáp án D"    
+        },
+        {
+            "id":7,
+            "question": "câu hỏi ID 7",
+            "a": "Đáp án A",
+            "b": "Đáp án B",
+            "c": "Đáp án C",
+            "d": "Đáp án D"    
+        },
+        {
+            "id":9,
+            "question": "câu hỏi ID 9",
+            "a": "Đáp án A",
+            "b": "Đáp án B",
+            "c": "Đáp án C",
+            "d": "Đáp án D"    
+        }
+    ]
+
+}
